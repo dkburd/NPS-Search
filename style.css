@@ -1,0 +1,26 @@
+/* body {
+  margin: 20px;
+}
+h2,
+p,
+h3 {
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+.results {
+  min-height: 100px;
+} */
+
+#stateone,
+#statetwo,
+#number,
+#submit {
+  display: block;
+  margin-bottom: 10px;
+}
+body {
+  margin: 10px;
+}
