@@ -5,7 +5,7 @@ let stateOneVal=$('#stateone')
 let stateOne=''   
 let stateTwoVal=$('#statetwo')
 let stateTwo=''  
-
+let stateTwoval=$('#statetwo')[0].value
 
 $('#number').bind('change', function() {
   number= numberVal.val();
@@ -16,16 +16,12 @@ $('#stateone').bind('change', function() {
 });     
 
 $('#statetwo').bind('change', function() {
-  stateOne= stateTwoVal.val()
+  stateTwo= stateTwoVal.val()
 });    
 
-// adding second state not working
-// &stateCode=${stateTwo}
-
 function getParks() {
-  alert(`${stateOne}`)
-  alert(stateTwo)
-  // let stateOne=$('#stateone')[0].value
+  console.log(`${stateOne}`)
+  console.log(`${stateTwo}`)
   fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateOne}&stateCode=${stateTwo}&limit=${number}&api_key=${api_key}`)
     .then(response => response.json())
     .then(responseJson => 
@@ -47,7 +43,7 @@ console.log(responseJson);
   
 }
 // $('#results').removeClass('hidden'); 
-// $('#results-list').empty();
+$('#results-list').empty();
 for (let i = 0; i < responseJson.data.length; i++){
 $('#results-list').append(
 `<li>
@@ -63,9 +59,6 @@ ${responseJson.data[i].fullName}
 
 </li> `
 
-
- 
-
 )}
 };
 
@@ -74,8 +67,6 @@ function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     getParks();
-    $( ".results").empty();
-    // $( ".results").removeClass('hidden');
   });
 }
 
