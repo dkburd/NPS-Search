@@ -1,32 +1,27 @@
 const api_key =`6gtAwh4zHWXKUd8hboy7B5JN14ZwciQKnMVHjVsl`
 let numberVal=$('#number')
 let number=10
-let stateOneVal=$('#stateone')
-let stateOne=''   
-let stateTwoVal=$('#statetwo')
-let stateTwo=''  
-let stateTwoval=$('#statetwo')[0].value
+let state=''
+
+
+function updateSearch(){
+state=$('#state').val();
+console.log(state)
+getParks()
+}
 
 $('#number').bind('change', function() {
   number= numberVal.val();
 });     
 
-$('#stateone').bind('change', function() {
-  stateOne= stateOneVal.val()
-});     
-
-$('#statetwo').bind('change', function() {
-  stateTwo= stateTwoVal.val()
-});    
 
 function getParks() {
-  console.log(`${stateOne}`)
-  console.log(`${stateTwo}`)
-  fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${stateOne}&stateCode=${stateTwo}&limit=${number}&api_key=${api_key}`)
+  console.log(`${state}`)
+  fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&limit=${number}&api_key=${api_key}`)
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
-    .catch(error => alert('Something went wrong. Try again later.'));
+    .catch(error => console.log('Something went wrong. Try again later.'));
 }
 
 
@@ -66,7 +61,7 @@ ${responseJson.data[i].fullName}
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
-    getParks();
+    updateSearch()
   });
 }
 
